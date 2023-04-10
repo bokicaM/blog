@@ -5,15 +5,15 @@
     <div class="container">
         <div class="row">
             <div class="col-12 pt-2">
-                <a href="{{route('categories.index')}}" class="btn btn-outline-dark ">Go back</a>
+                <a href="{{route('categories.index')}}" class="btn btn-outline-dark ">Nazad</a>
                 <div class="border rounded mt-5 pl-4 pr-4 pt-4 pb-4">
-                    <h1 class="display-6">Create a New Category</h1>
+                    <h1 class="display-6">Dodaj novu kategoriju</h1>
                     <hr>
                     <form action="" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="row mx-5">
                             <div class="control-group col-12 mt-2">
-                                <label for="name">Category Name</label>
+                                <label for="name">Naziv kategorije</label>
                                 <input type="text" id="name" class="form-control" name="name"
                                        placeholder="Enter Category Name" required>
                             @if ($errors->any())
@@ -30,7 +30,7 @@
                         <div class="row mt-2">
                             <div class="control-group col-12 text-center">
                                 <button id="btn-submit" class="btn btn-primary">
-                                    Create Category
+                                    Kreiraj kategoriju
                                 </button>
                             </div>
                         </div>

@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-lg-12 margin-tb">
                 <div class="pull-right">
-                    <a class="btn btn-success" href="{{ route('categories.create') }}"> Create New Category</a>
+                    <a class="btn btn-success" href="{{ route('categories.create') }}"> Dodaj novu kategoriju</a>
                 </div>
             </div>
         </div>
@@ -24,10 +24,10 @@
 
         <table class="table table-bordered">
             <tr>
-                <th>No</th>
-                <th>Name</th>
-                <th>Post count</th>
-                <th>Action</th>
+                <th>Id</th>
+                <th>Naziv</th>
+                <th>Broj pregleda</th>
+                <th>Akcija</th>
             </tr>
             @foreach ($categories as $i => $category)
                 <tr>
@@ -36,12 +36,12 @@
                     <td>{{ $category->posts->count() }}</td>
                     <td>
                         <form action="{{ route('categories.destroy',$category) }}" method="POST">
-                            <a class="btn btn-primary" href="{{ route('categories.edit',$category) }}">Edit</a>
+                            <a class="btn btn-primary" href="{{ route('categories.edit',$category) }}">Izmeni</a>
                             @csrf
                             @method('DELETE')
 
                             <button type="submit"
-                                    class="btn {{auth()->user()->isAdmin() ? 'btn-danger' : 'btn-secondary'}}">Delete
+                                    class="btn {{auth()->user()->isAdmin() ? 'btn-danger' : 'btn-secondary'}}">Obriši
                             </button>
                         </form>
                     </td>
