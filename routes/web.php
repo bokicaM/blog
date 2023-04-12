@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\WebServiceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +37,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/categories/{category:slug}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
     Route::put('/categories/{category:slug}/edit', [CategoryController::class, 'update'])->name('categories.update');
     Route::delete('/categories/{category:slug}', [CategoryController::class, 'destroy'])->name('categories.destroy');
+
+    Route::get('/api', [WebServiceController::class,'callWebService'])->name('api');
+
 });
 //Route::resource('/categories', CategoryController::class);
 

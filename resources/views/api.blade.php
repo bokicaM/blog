@@ -1,5 +1,4 @@
-<!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,6 +16,7 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 <body>
+
 <div id="app">
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
@@ -25,8 +25,8 @@
             </a>
 
             @auth
-                <a href="{{route('posts.create')}}" class="mx-2 btn btn-outline-dark my-2">Novi post</a>
-                <a href="{{route('categories.index')}}" class="mx-2 btn btn-outline-dark my-2">Pregled kategorija</a>
+                <a href="{{route('posts.create')}}" class="mx-2 btn btn-outline-dark my-2">New Post</a>
+                <a href="{{route('categories.index')}}" class="mx-2 btn btn-outline-dark my-2">View Categories</a>
                 <a href="{{route('api')}}" class="mx-2 btn btn-outline-dark my-2">API</a>
             @endauth
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -85,5 +85,10 @@
         @yield('content')
     </main>
 </div>
+<ul>
+    @foreach ($data as $item)
+        <li>{{ $item['id'] }}: {{ $item['name'] }}</li>
+    @endforeach
+</ul>
 </body>
 </html>

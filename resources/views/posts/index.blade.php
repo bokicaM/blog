@@ -23,14 +23,14 @@
                 @endif
                 <input type="text" class="form-control border-secondary mx-2" name="search" placeholder="Search ..."
                        value="{{ request('search') }}">
-                <a href="{{ route('posts.index') }}" class="btn btn-outline-dark btn-sm mx-2">Reset</a>
+                <a href="{{ route('posts.index') }}" class="btn btn-outline-dark btn-sm mx-2">Poništi pretragu</a>
             </div>
         </form>
         <div class="my-3">
-            <p class="p-0 m-0">Sort by</p>
-            <a href="{{'?sortBy=oldest'}}" class="btn btn-outline-dark btn-sm mr-3">Asc</a>
-            <a href="{{'?sortBy=newest'}}" class="btn btn-outline-dark btn-sm mr-3">Desc</a>
-            <a href="{{'?sortBy=MostViews'}}" class="btn btn-outline-dark btn-sm mr-3">Most views</a>
+            <p class="p-0 m-0">Sortiranje</p>
+            <a href="{{'?sortBy=oldest'}}" class="btn btn-outline-dark btn-sm mr-3">Rastuće</a>
+            <a href="{{'?sortBy=newest'}}" class="btn btn-outline-dark btn-sm mr-3">Opadajuće</a>
+            <a href="{{'?sortBy=MostViews'}}" class="btn btn-outline-dark btn-sm mr-3">Najviše pregleda</a>
         </div>
         <div class="row">
             @forelse($posts as $post)
@@ -48,16 +48,16 @@
                             <p class="card-text">{{$post->excerpt}}</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                    <a href="{{route('posts.show', $post)}}" class="btn btn-sm btn-outline-secondary">View</a>
+                                    <a href="{{route('posts.show', $post)}}" class="btn btn-sm btn-outline-secondary">Pročitaj</a>
                                     @auth
                                         <a href="{{route('posts.edit', $post)}}"
-                                           class="btn btn-sm btn-outline-secondary">Edit</a>
+                                           class="btn btn-sm btn-outline-secondary">Izmeni</a>
                                         <form method="POST" action="{{route('posts.destroy', $post)}}">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit"
                                                     class="mx-2 btn {{auth()->user()->isAdmin() ? 'btn-danger' : 'btn-secondary' }}">
-                                                Delete
+                                                Obriši
                                             </button>
                                         </form>
                                     @endauth
@@ -69,7 +69,7 @@
                     </div>
                 </div>
             @empty
-                <h1>No Posts</h1>
+                <h1>Nema postova</h1>
             @endforelse
             {{$posts->links() }}
         </div>
