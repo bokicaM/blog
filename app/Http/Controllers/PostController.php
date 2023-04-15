@@ -57,7 +57,7 @@ class PostController extends Controller
             }
             $post = Post::create([
 //                'user_id' => 1,
-            'user_id' => auth()->id(),
+                'user_id' => auth()->id(),
                 'category_id' => $request->category,
                 'title' => $request->title,
                 'slug' => Str::slug($request->title),
@@ -66,9 +66,9 @@ class PostController extends Controller
                 'thumbnail' => $thumbnail ?? NULL,
             ]);
 
-            return redirect('/')->with('success', 'Post created!');
+            return redirect('/')->with('success', 'Post je kreiran!');
         } else {
-            return back()->with('error', 'You have no permission to create!');
+            return back()->with('error', 'Nemate dozvolu da kreirate post!');
 
         }
     }
@@ -91,8 +91,7 @@ class PostController extends Controller
             }
 
             $post->update([
-//                'user_id' => 1,
-            'user_id' => auth()->id(),
+                'user_id' => auth()->id(),
                 'category_id' => $request->category,
                 'title' => $request->title,
                 'slug' => Str::slug($request->title),
@@ -100,9 +99,9 @@ class PostController extends Controller
                 'body' => $request->body,
                 'thumbnail' => $thumbnail ?? $post->thumbnail,
             ]);
-            return redirect('/')->with('success', 'Post updated');
+            return redirect('/')->with('success', 'Post je izmenjen');
         } else {
-            return back()->with('error', 'You have no permission to update!');
+            return back()->with('error', 'Nemate dozvolu da vršite izmene!');
         }
     }
 
@@ -110,9 +109,9 @@ class PostController extends Controller
     {
         if (auth()->user()->isAdmin()) {
             $post->delete();
-            return redirect()->route('posts.index')->with('success', 'Post has been deleted successfully');
+            return redirect()->route('posts.index')->with('success', 'Post je uspešno obrisan');
         } else {
-            return back()->with('error', 'You have no permission to delete!');
+            return back()->with('error', 'Nemate dozvolu za brisanje!');
         }
     }
 
