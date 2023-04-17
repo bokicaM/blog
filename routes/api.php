@@ -20,5 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('apiposts', [ApiPostController::class, 'index']);
-Route::post('apiposts',[ApiPostController::class, 'store']);
+Route::post('apiposts', [ApiPostController::class, 'store']);
+Route::get('apiposts/{id}', [ApiPostController::class, 'show']);
+Route::put('apiposts/{id}/edit', [ApiPostController::class, 'update']);
 

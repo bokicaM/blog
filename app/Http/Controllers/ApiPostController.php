@@ -33,7 +33,7 @@ class ApiPostController extends Controller
             'excerpt' => 'required|max:255',
             'body' => 'required|max:255',
             'user_id' => 'required',
-            'slug' => 'required|max:50',
+            'slug' => 'required|max:100',
             'category_id' => Rule::in($categories)
         ]);
 
@@ -47,7 +47,7 @@ class ApiPostController extends Controller
                 'title' => $request->title,
                 'excerpt' => $request->excerpt,
                 'body' => $request->body,
-                'category_id' => $request->category,
+                'category_id' => $request->category_id,
                 'user_id' => $request->user_id,
                 'slug' => $request->slug
             ]);
@@ -64,4 +64,65 @@ class ApiPostController extends Controller
             }
         }
     }
+
+    public function show($id)
+    {
+        $posts = Post::find($id);
+        if ($posts) {
+            return response()->json([
+                'status' => 200,
+                'post' => $posts
+            ], 200);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => "Nije pronadjen post!"
+            ], 404);
+        }
+    }
+
+    public function update(Request $request, $id)
+    {
+        $id = (int)($id);
+        $categories = Category::pluck('id')->toArray();
+        $validate = Validator::make($request->all(), [
+            'title' => 'required|string|max:255',
+            'excerpt' => 'required|max:255',
+            'body' => 'required|max:255',
+            'user_id' => 'required',
+            'slug' => 'required|max:1000',
+            'category_id' => Rule::in($categories)
+        ]);
+
+        if ($validate->fails()) {
+            return response()->json([
+                'status' => 422,
+                'errors' => $validate->messages()
+            ], 422);
+        } else {
+            $post = Post::find($id);
+
+            if ($post) {
+                $post->update([
+                    'title' => $request->title,
+                    'excerpt' => $request->excerpt,
+                    'body' => $request->body,
+                    'category_id' => $request->category_id,
+                    'user_id' => $request->user_id,
+                    'slug' => $request->slug
+                ]);
+                return response()->json([
+                    'status' => 200,
+                    'message' => "Uspesno!"
+                ], 200);
+            } else {
+                return response()->json([
+                    'status' => 500,
+                    'message' => "Neuspesno!"
+                ], 500);
+            }
+        }
+    }
+
+
 }
