@@ -16,9 +16,7 @@ class ApiPostController extends Controller
 {
     public function index()
     {
-        $posts = Post::filter(request(['search', 'category', 'sortBy']))
-            ->paginate(6)
-            ->withQueryString();
+        $posts = Post::all();
 
         return response()->json([
             'title' => $posts
